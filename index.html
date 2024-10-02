@@ -1,0 +1,522 @@
+<html>
+<head>
+    <title>eBook Landing Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f8fa;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .navbar .nav-item {
+            flex: 1;
+            text-align: center;
+        }
+        .navbar .nav-item a {
+            text-decoration: none;
+            color: #000000;
+            font-size: 16px;
+            margin: 0 20px;
+            position: relative;
+        }
+        .navbar .nav-item a.active {
+            border-bottom: 2px solid #000000;
+        }
+        .navbar .left, .navbar .right {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .left i {
+            margin-right: 5px;
+        }
+        .navbar .left a {
+            text-decoration: none;
+            color: #0073e6;
+            font-size: 16px;
+        }
+        .navbar .right {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .right .icon {
+            background-color: #e0e0e0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+        .navbar .right .icon i {
+            margin-right: 5px;
+        }
+        .navbar .right .icon a {
+            text-decoration: none;
+            color: #0073e6;
+            font-size: 16px;
+        }
+        .container {
+            display: flex;
+        }
+        .sidebar {
+            width: 400px;
+            background-color: #ffffff;
+            padding:20px;
+            border-right: 1px solid #e0e0e0;
+            position: relative;
+            background-color: rgb(219, 215, 215);
+        }
+        .sidebar .toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 20px; /* Increased height */
+            background-color: #e0e0e0;
+            text-align: right;
+            cursor: pointer;
+        }
+        .sidebar .toggle i {
+            font-size: 16px; /* Increased font size */
+            color: #000000;
+        }
+        .sidebar .top-left-row {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #ffffff;
+        }
+        .sidebar .top-left-row i, .sidebar .top-left-row a {
+            color: #0073e6; /* Set color to blue */
+        }
+        .sidebar .top-left-row i {
+            margin-right: 5px;
+        }
+        .sidebar .top-left-row a {
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .sidebar .edit-page-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .sidebar .edit-page-row h2 {
+            font-size: 18px;
+            margin: 0;
+        }
+        .sidebar .icon-box {
+            display: flex;
+            align-items: center;
+            background-color: #f0f0f0; /* Light gray background */
+            border-radius: 4px;
+            padding: 5px;
+            margin-left: 10px;
+        }
+        .sidebar .icon-box i {
+            margin: 0 5px;
+            color: #000000; /* Black color */
+        }
+        .sidebar .icon-box-divider {
+            width: 1px;
+            height: 20px;
+            background-color: #e0e0e0;
+            margin: 0 5px;
+        }
+        .sidebar .icon-box i:hover {
+            cursor: pointer;
+        }
+        .sidebar .search-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .sidebar .search-box input {
+            width: 100%;
+            padding: 8px 30px 8px 10px; /* Adjusted padding to make space for the icon */
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+        }
+        .sidebar .search-box i {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #0073e6;
+            cursor: pointer;
+        }
+        .sidebar .modules {
+            margin-bottom: 20px;
+        }
+        .sidebar .modules h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar .modules h3 i {
+            margin-right: 5px;
+        }
+        .sidebar .module-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .sidebar .module-grid .module-box {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .sidebar .bottom-row ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            width: 100%;
+        }
+        .sidebar .bottom-row ul li {
+            flex: 1;
+            text-align: center;
+            color: #000000; /* Black text color */
+            border-right: 1px solid #d0d0d0; /* Border between list items */
+            padding: 10px;
+        }
+        .sidebar .bottom-row ul li:last-child {
+            border-right: none; /* Remove border from the last list item */
+        }
+        .module-box span{
+            font-size: 12px;
+        }
+        .module-box i{
+            font-size:23px ;
+        }
+        .content {
+            flex: 1;
+            padding: 40px;
+        }
+        .content .main {
+            display: flex;
+            gap: 40px;
+            /* height: 600px; */
+        }
+        .content .main .text-content {
+            flex: 0.8; /* Decreased width to 80% */
+            overflow-y: auto; /* Added to handle overflow */
+        }
+        .content .main .text-content h2 {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+        .content .main .text-content p {
+            font-size: 16px;
+            color: #4a4a4a;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            /* width: 78%; */
+        }
+        .content .main .text-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .content .main .text-content ul li {
+            font-size: 16px;
+            color: #4a4a4a;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            width: 78%; /* Set width to 78% */
+        }
+        .content .main .text-content ul li:before {
+            content: "\2022";
+            color: #0073e6;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        .content .main .form-container {
+            width: 350px; /* Increased width */
+            background-color: #003366;
+            padding: 20px;
+            border-radius: 8px;
+            color: #ffffff;
+            overflow-y: auto; /* Added to handle overflow */
+        }
+        .content .main .form-container h2 {
+            font-size: 20px;
+            margin-bottom: 50px; /* Added more gap at the bottom */
+            text-align: center; /* Centered the heading */
+        }
+        .content .main .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .content .main .form-container form label {
+            font-size: 14px;
+            margin-bottom: 5px; /* Added space at the bottom of labels */
+        }
+        .content .main .form-container form input,
+        .content .main .form-container form textarea {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            margin-bottom: 10px; /* Added space at the bottom of form elements */
+        }
+        .content .main .form-container form input[type="email"],
+        .content .main .form-container form input[type="text"],
+        .content .main .form-container form textarea {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .content .main .form-container form input[type="submit"] {
+            background-color: #00cc66;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 0; /* No space at the bottom of the submit button */
+        }
+        .top-row {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .top-row h2 {
+            font-size: 24px;
+            margin: 0;
+            text-align: center;
+        }
+        .top-row .title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .top-row .title-container h1 {
+            font-size: 24px;
+            margin: 0;
+            text-align: center;
+        }
+        .toggle-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px; /* Increased height */
+            background-color: #e0e0e0;
+            text-align: center;
+            cursor: pointer;
+            display: none;
+        }
+        .toggle-button i {
+            font-size: 16px; /* Increased font size */
+            color: #000000;
+        }
+    </style>
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.querySelector('.sidebar');
+            var toggleIcon = document.querySelector('.toggle i');
+            var toggleButton = document.querySelector('.toggle-button');
+            var runTestIcon = document.querySelector('.run-test-icon');
+            if (sidebar.style.display === 'none') {
+                sidebar.style.display = 'block';
+                toggleIcon.classList.remove('fa-angle-double-left');
+                toggleIcon.classList.add('fa-angle-double-right');
+                toggleButton.style.display = 'none';
+                runTestIcon.style.display = 'none';
+            } else {
+                sidebar.style.display = 'none';
+                toggleIcon.classList.remove('fa-angle-double-right');
+                toggleIcon.classList.add('fa-angle-double-left');
+                toggleButton.style.display = 'block';
+                runTestIcon.style.display = 'inline';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="left">
+            <i class="fas fa-mug-hot run-test-icon" onclick="toggleSidebar()"></i>
+            <a href="#" onclick="toggleSidebar()">Run a test</a>
+        </div>
+        <div class="nav-item">
+            <a href="#" class="content">Content</a>
+            <a href="#">Settings</a>
+            <a href="#">Optimize</a>
+            <a href="#">Publishing Options</a>
+        </div>
+        <div class="right">
+            <div class="icon">
+                <i class="fas fa-comment-alt"></i>
+                <a href="#">Preview</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <div class="top-left-row">
+                <i class="fas fa-home"></i>
+                <a href="#">Home</a>
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            <div class="toggle" onclick="toggleSidebar()">
+                <i class="fas fa-angle-double-right"></i>
+            </div>
+            <div class="edit-page-row">
+                <h2>Edit page</h2>
+                <div class="icon-box">
+                    <i class="fas fa-desktop"></i>
+                    <div class="icon-box-divider"></div>
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="icon-box">
+                    <i class="fas fa-arrow-left"></i>
+                    <div class="icon-box-divider"></div>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            <div class="bottom-row">
+                <ul style="border: 0.5px solid gray; background-color: rgb(238, 231, 231); margin-bottom: 18px;">
+                    <li>Add</li>
+                    <li>Contents</li>
+                    <li>Design</li>
+                </ul>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search modules">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="modules">
+                <h3><i class="fas fa-chevron-down"></i>Theme modules (6)</h3>
+            </div>
+            <div class="module-grid">
+                <div class="module-box">
+                    <span>........</span><br>
+                    <i class="fas fa-bars" style="margin-top: 5px;"></i><br>
+                    <span style="margin-top: 5px;">Blog post listing</span>
+                </div>
+                <div class="module-box">
+                    <span>........</span><br>
+                    <i class="fa-solid fa-mobile-button"></i><br>
+                    <span style="margin-top: 5px;">Button</span>
+                </div>
+                <div class="module-box">
+                    <span>........</span><br>
+                    <i class="fa-solid fa-certificate"></i><br>
+                    <span style="margin-top: 5px;">icon</span>
+                </div>
+                <div class="module-box">
+                    <span>........</span><br>
+                    <i class="fa-solid fa-user"></i><br>
+                    <span style="margin-top: 5px;">Profile</span>
+                </div>
+                <div class="module-box">
+                    <span>........</span><br>
+                    <i class="fa-solid fa-message"></i><br>
+                    <span style="margin-top: 5px;">Social follow</span>
+                </div>
+                <div class="module-box">
+                    <span>........</span><br>
+                    <i class="fa-solid fa-quote-left"></i><br>
+                    <span style="margin-top: 5px;">Testimonial slide</span>
+                </div>
+            </div>
+
+                <p>Can't find what you need? <a href="#">Click here</a> to get a custom-made module. </p>
+
+            <div class="modules">
+                <h3><i class="fas fa-chevron-down"></i>Common modules (13)</h3>
+            </div>
+            <div class="module-grid">
+                <div class="module-box">
+                    <span>........</span><br>
+                    <i class="fa-solid fa-file-lines"></i><br>
+                    <span style="margin-top: 5px;">Rich Text</span>
+                </div>
+                <div class="module-box">
+                    <span>........</span><br>
+                    <i class="fa-regular fa-image"></i><br>
+                    <span style="margin-top: 5px;">Image</span>
+                </div>
+                <div class="module-box">
+                    <span>........</span><br>
+                    <i class="fa-solid fa-heading"></i><br>
+                    <span style="margin-top: 5px;">Header</span>
+                </div>
+                <div class="module-box">
+                    <span>........</span><br>
+                    <i class="fa-solid fa-tablet-button"></i><br>
+                    <span style="margin-top: 5px;">Call-to-Action</span>
+                </div>
+                <div class="module-box">
+                    <span>........</span><br>
+                    <i class="fa-solid fa-align-justify"></i><br>
+                    <span style="margin-top: 5px;">Form</span>
+                </div>
+                <div class="module-box">
+                    <span>........</span><br>
+                    <i class="fa-regular fa-images"></i><br>
+                    <span style="margin-top: 5px;">Image Galery</span>
+                </div>
+            </div>
+        </div>
+        <div class="toggle-button" onclick="toggleSidebar()">
+            <i class="fas fa-angle-double-left"></i>
+        </div>
+        <div class="content">
+            <div class="top-row">
+                <h2>eBook</h2>
+                <div class="title-container">
+                    <h1>5 Ways to Build a</h1>
+                    <h1>Website on the Cheap</h1>
+                </div>
+            </div>
+            <div class="main">
+                <div class="text-content">
+                    <h2>What's Inside?</h2>
+                    <p>Morbi et dolor est. Donec at dolor vehicula, molestie erat non, rutrum tellus. Vestibulum in eros non augue convallis pulvinar. Aliquam erat volutpat. Cras interdum felis at sem pharetra, sed convallis elit auctor. Nulla semper ut ante eu dapibus. Mauris dui orci, pulvinar sit amet ligula vel.</p>
+                    <p>Cras interdum felis at sem pharetra, sed convallis elit auctor. Nulla semper ut ante eu dapibus. Mauris dui orci, pulvinar sit amet ligula vel.</p>
+                    <ul>
+                        <li>Far far away, behind the word mountains, far from the countries Vokalia</li>
+                        <li>Far far away, behind the word mountains, far from the countries Vokalia</li>
+                        <li>Far far away, behind the word mountains, far from the countries Vokalia</li>
+                    </ul>
+                </div>
+                <div class="form-container">
+                    <h2 style="margin-bottom: 50px;">Send me the ebook!</h2>
+                    <form>
+                        <label for="email" style="margin-bottom: 10px;">Email*</label>
+                        <input type="email" id="email" placeholder="Email*" required style="margin-bottom: 20px;">
+                        
+                        <label for="first-name" style="margin-bottom: 10px;">First name</label>
+                        <input type="text" id="first-name" placeholder="First name" style="margin-bottom: 20px;">
+                        
+                        <label for="last-name" style="margin-bottom: 10px;">Last name</label>
+                        <input type="text" id="last-name" placeholder="Last name" style="margin-bottom: 20px;">
+                        
+                        <label for="message" style="margin-bottom: 10px;">Message</label>
+                        <textarea id="message" placeholder="Message" style="margin-bottom: 20px;"></textarea>
+                        
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
